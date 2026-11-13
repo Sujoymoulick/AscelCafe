@@ -1,0 +1,23 @@
+/** Lenis smooth scroll synced with GSAP ScrollTrigger. */
+import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+export function setupScroll() {
+	const lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 0.95, touchMultiplier: 1.4 });
+	lenis.on('scroll', ScrollTrigger.update);
+	gsap.ticker.add((time) => lenis.raf(time * 1000));
+	gsap.ticker.lagSmoothing(0);
+	window.__lenis = lenis;
+
+	document.addEventListener('click', (e) => {
+		const a = e.target.closest('a[href^="#"]');
+		if (!a) return;
+		const id = a.getAttribute('href');
+		const target = id.length > 1 ? document.querySelector(id) : null;
+		if (!target && id !== '#top') return;
+		e.preventDefault();
+		lenis.scrollTo(id === '#top' ? 0 : target, { duration: 1.6 });
+	});
+	return lenis;
+}

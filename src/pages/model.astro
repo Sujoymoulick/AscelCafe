@@ -1,0 +1,65 @@
+---
+/** Close-up model viewer for the procedural tostada (dev aid). */
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Toast model</title>
+		<meta name="robots" content="noindex" />
+		<style>
+			html, body { margin: 0; height: 100%; background: #2A9EA0; overflow: hidden; }
+			canvas { display: block; width: 100vw; height: 100vh; }
+			p { position: fixed; left: 16px; bottom: 12px; margin: 0; font: 600 13px system-ui; color: #F1EDE2; }
+		</style>
+	</head>
+	<body>
+		<p>Drag to orbit · scroll to zoom</p>
+		<script>
+			import * as THREE from 'three';
+			import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+			import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
+			import { makeTostada } from '../scripts/tostada.js';
+
+			const r = new THREE.WebGLRenderer({ antialias: true });
+			r.setPixelRatio(Math.min(devicePixelRatio, 2));
+			r.setSize(innerWidth, innerHeight);
+			r.outputColorSpace = THREE.SRGBColorSpace;
+			r.toneMapping = THREE.ACESFilmicToneMapping;
+			r.toneMappingExposure = 1.08;
+			r.setClearColor('#2A9EA0');
+			document.body.appendChild(r.domElement);
+			const scene = new THREE.Scene();
+			scene.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(), 0.04).texture;
+			scene.environmentIntensity = 0.55;
+			scene.add(new THREE.HemisphereLight('#fff6e8', '#8a4a2a', 1.05));
+			const key = new THREE.DirectionalLight('#fff1dc', 2.6);
+			key.position.set(4, 7, 5);
+			const fill = new THREE.DirectionalLight('#ffcfa0', 0.9);
+			fill.position.set(-5, 2, 3);
+			const rim = new THREE.DirectionalLight('#ffffff', 1.4);
+			rim.position.set(0, 4, -6);
+			scene.add(key, fill, rim);
+			const cam = new THREE.PerspectiveCamera(30, innerWidth / innerHeight, 0.1, 100);
+			const q = new URLSearchParams(location.search);
+			cam.position.set(0, Number(q.get('y') ?? 2.6), Number(q.get('z') ?? 4.6));
+			const ctl = new OrbitControls(cam, r.domElement);
+			ctl.target.set(0, -0.05, 0);
+			ctl.enableDamping = true;
+			ctl.autoRotate = q.get('spin') !== '0';
+			ctl.autoRotateSpeed = 1.2;
+			const t = makeTostada();
+			scene.add(t.root);
+			addEventListener('resize', () => {
+				cam.aspect = innerWidth / innerHeight;
+				cam.updateProjectionMatrix();
+				r.setSize(innerWidth, innerHeight);
+			});
+			r.setAnimationLoop(() => {
+				ctl.update();
+				r.render(scene, cam);
+			});
+		</script>
+	</body>
+</html>

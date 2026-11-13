@@ -1,0 +1,72 @@
+---
+/** Fictional, hand-drawn style town map. Roads are drawn with stroke-dashoffset on scroll. */
+let seed = 7;
+const rnd = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+
+const main = 'M-20 560 C260 520 520 610 800 565 S1300 495 1620 545';
+const roads = [
+	'M800 565 C780 420 830 300 790 -20',
+	'M800 565 C820 700 760 860 800 1020',
+	'M300 545 C320 400 260 250 330 80',
+	'M300 545 C280 700 340 820 300 980',
+	'M1240 520 C1220 380 1300 260 1250 100',
+	'M1240 520 C1270 680 1210 820 1260 960',
+	'M330 300 C520 280 640 330 790 300',
+	'M790 300 C980 270 1100 310 1270 280',
+	'M300 800 C480 780 620 820 790 790',
+	'M790 790 C1000 820 1120 770 1260 790',
+	'M100 200 C200 260 260 250 330 300',
+	'M1270 280 C1380 220 1480 260 1600 200',
+];
+const river = 'M-20 140 C200 210 420 120 640 170 S1040 260 1200 180 S1500 90 1620 150';
+
+const blocks: { x: number; y: number; w: number; h: number; c: string }[] = [];
+const colors = ['#FFBB1C', '#F7E3B5', '#F1C27A', '#FFBB1C', '#F7E3B5'];
+for (let i = 0; i < 170; i++) {
+	const x = 40 + rnd() * 1520;
+	const y = 230 + rnd() * 720;
+	if (Math.abs(y - (560 + Math.sin(x / 260) * 25)) < 55) continue;
+	if (Math.abs(x - 800) < 40 || Math.abs(x - 300) < 40 || Math.abs(x - 1240) < 40) continue;
+	if (Math.abs(x - 800) < 120 && Math.abs(y - 560) < 140) continue;
+	blocks.push({ x, y, w: 18 + rnd() * 26, h: 14 + rnd() * 20, c: colors[i % colors.length] });
+}
+const labels = [
+	{ x: 330, y: 300, t: 'MAIN SQUARE' },
+	{ x: 1250, y: 285, t: 'MARKET' },
+	{ x: 300, y: 800, t: 'LIBRARY' },
+	{ x: 1260, y: 790, t: 'STATION' },
+	{ x: 790, y: 300, t: 'PARK' },
+];
+---
+<div class="vmap" data-map>
+	<svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative map showing Ascelcafe in the centre of town">
+		<rect width="1600" height="1000" fill="#F4EEDD" />
+		<path d={river} fill="none" stroke="#2A9EA0" stroke-width="26" stroke-linecap="round" data-road opacity=".85" />
+		<g>
+			{blocks.map((b) => <rect class="vmap__b" x={b.x} y={b.y} width={b.w} height={b.h} rx="3" fill={b.c} stroke="#7A1C24" stroke-width="2" transform={`rotate(${(b.x % 20) - 10} ${b.x} ${b.y})`} />)}
+		</g>
+		<g fill="none" stroke="#7A1C24" stroke-width="5" stroke-linecap="round">
+			{roads.map((d) => <path d={d} data-road />)}
+		</g>
+		<path d={main} fill="none" stroke="#B4173A" stroke-width="14" stroke-linecap="round" data-road />
+		<circle cx="800" cy="565" r="70" fill="none" stroke="#B4173A" stroke-width="3" stroke-dasharray="6 10" class="vmap__ring" />
+		{labels.map((l) => (
+			<g class="vmap__label" transform={`translate(${l.x} ${l.y})`}>
+				<rect x="-6" y="-22" width={l.t.length * 15 + 44} height="40" rx="20" fill="#2A9EA0" />
+				<circle cx="16" cy="-2" r="7" fill="#FFBB1C" />
+				<text x="32" y="6" fill="#F1EDE2" font-family="Archivo" font-weight="800" font-size="20">{l.t}</text>
+			</g>
+		))}
+		<g class="vmap__here" transform="translate(800 565)">
+			<g class="vmap__pin">
+				<path d="M0 0C-8-22-36-40-36-66a36 36 0 0 1 72 0C36-40 8-22 0 0z" fill="#B4173A" stroke="#7A1C24" stroke-width="4" />
+				<text x="0" y="-55" text-anchor="middle" fill="#F1EDE2" font-family="Archivo" font-weight="900" font-size="34">A</text>
+			</g>
+			<g transform="translate(-260 -150) rotate(-4)">
+				<rect width="190" height="74" rx="14" fill="#FFBB1C" stroke="#7A1C24" stroke-width="3" />
+				<text x="18" y="34" fill="#B4173A" font-family="Archivo" font-weight="900" font-size="28">Here!</text>
+				<text x="18" y="60" fill="#B4173A" font-family="Archivo" font-weight="800" font-size="17">ASCELCAFE</text>
+			</g>
+		</g>
+	</svg>
+</div>

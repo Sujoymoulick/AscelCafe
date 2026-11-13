@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Page not found — Ascelcafe | Demo by AscelStack">
+	<main class="nf">
+		<p class="nf__code">404</p>
+		<h1 class="nf__title">Oops! This cup is empty.</h1>
+		<p class="nf__text">The page you're looking for isn't on the menu.</p>
+		<div class="nf__actions">
+			<a class="btn" href="/">Back to Ascelcafe</a>
+			<a class="btn btn--line" href="https://ascelstack.com" target="_blank" rel="noopener">AscelStack ↗</a>
+		</div>
+	</main>
+</Base>
+<style>
+	.nf { min-height: 100svh; display: grid; place-content: center; justify-items: center; gap: 18px; padding: 24px; text-align: center; background: var(--red); color: var(--cream); }
+	.nf__code { font: 900 clamp(110px, 30vw, 280px)/.8 var(--f-title); font-stretch: 125%; color: var(--yellow); }
+	.nf__title { font: 900 clamp(28px, 6vw, 56px)/1 var(--f-title); font-stretch: 125%; text-transform: uppercase; }
+	.nf__text { font: 600 18px/1.4 var(--f-text); opacity: .9; }
+	.nf__actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 10px; }
+</style>

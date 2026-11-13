@@ -1,0 +1,46 @@
+---
+import '../styles/main.css';
+const {
+	title = 'Ascelcafe — Café & Sweets | Demo website by AscelStack',
+	description = 'Ascelcafe is a demo café website designed and developed by AscelStack: coffee, churros and toast, with 3D and scroll animations. Get a website like this at ascelstack.com.',
+} = Astro.props;
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'Ascelcafe (demo)',
+	description,
+	creator: { '@type': 'Organization', name: 'AscelStack', url: 'https://ascelstack.com' },
+	publisher: { '@type': 'Organization', name: 'AscelStack', url: 'https://ascelstack.com' },
+	copyrightHolder: { '@type': 'Organization', name: 'AscelStack', url: 'https://ascelstack.com' },
+	copyrightYear: 2026,
+};
+---
+<!doctype html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="author" content="AscelStack" />
+		<meta name="creator" content="AscelStack — https://ascelstack.com" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Ascelcafe — a demo by AscelStack" />
+		<link rel="author" href="https://ascelstack.com" />
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+		<meta name="theme-color" content="#B4173A" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Barlow+Condensed:wght@700;800&family=Kaushan+Script&family=Source+Sans+3:wght@400;600;700&display=swap"
+		/>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>

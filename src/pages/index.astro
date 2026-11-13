@@ -1,0 +1,392 @@
+---
+import Base from '../layouts/Base.astro';
+import Wordmark from '../components/Wordmark.astro';
+import MapSvg from '../components/MapSvg.astro';
+
+const marqueeA = ['COFFEE', 'CHURROS', 'TOAST', "LET'S GO!"];
+const marqueeB = ['A LITTLE SUGAR', 'A LOT OF LOVE', 'ONE MORE COFFEE & WE GO'];
+
+const steps = [
+	['THE BREAD', 'Sourdough, toasted till it sings.'],
+	['THE TOMATO', 'Grated ripe. Spread thick.'],
+	['THE AVOCADO', 'Sliced. Fanned. Proud.'],
+	['THE EGG', 'Sunny side up, always.'],
+	['THE SALT!', 'Flakes. Pepper. Chili. Ready!'],
+];
+
+const cards = [
+	['g1.jpg', 'THE CLASSIC'],
+	['g2.jpg', 'FRENCH TOAST'],
+	['g3.jpg', 'THE CORTADO'],
+	['g4.jpg', 'SWEET TOOTH'],
+	['g5.jpg', 'THE BIG TABLE'],
+	['g6.jpg', 'THE STACK'],
+	['g7.jpg', 'BERRY CUP'],
+	['g8.jpg', 'THE CLOUD'],
+];
+
+const namesA = ['THE CLASSIC', 'THE CORTADO', 'SWEET TOOTH', 'EARLY BIRD', 'THE CLOUD', 'THE HOT DOG', "GRANDMA'S", 'THE DOUBLE'];
+const namesB = ['FRENCH TOAST', 'BERRY CUP', 'THE STACK', 'THE NAP', 'CHURRO KING', 'THE BIG TABLE', 'THE TREAT', 'THE DIVA'];
+
+const hours = [
+	{ days: 'MON — FRI', from: '07:30', to: '17:00', d: '1,2,3,4,5' },
+	{ days: 'SAT & SUN', from: '09:00', to: '15:00', d: '6,0' },
+];
+
+const cup = `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20h26v8a11 11 0 0 1-11 11h-4A11 11 0 0 1 9 28z"/><path d="M35 23h3a5 5 0 0 1 0 10h-4"/><path d="M17 7c-2 3 2 5 0 8M24 5c-2 3 2 5 0 8"/><path d="M6 43h32"/></svg>`;
+const churro = `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M10 38 36 8"/><path d="M14 40 40 10"/><path d="M8 34 32 6"/><circle cx="36" cy="36" r="6"/></svg>`;
+---
+
+<Base>
+	<a class="skip" href="#contenu">Skip to content</a>
+	<a class="demo-badge" href="https://ascelstack.com" target="_blank" rel="noopener" data-cursor-text="AscelStack">
+		<img src="/brand/ascelstack-logo.svg" alt="AscelStack" width="88" height="21" /><span>Demo</span>
+	</a>
+
+	<!-- ============ INTRO ============ -->
+	<div class="intro" data-intro aria-hidden="true">
+		<div class="intro__panels">
+			<span style="--c:#B4173A"></span><span style="--c:#EF3B16"></span><span style="--c:#FF8A2A"></span><span style="--c:#FFBB1C"></span><span style="--c:#2A9EA0"></span>
+		</div>
+		<div class="intro__wait">
+			<div class="intro__cup" set:html={cup} />
+			<ul class="intro__msgs" style="--n:4">
+				<li style="--i:0">Grinding the beans. Patience, friend.</li>
+				<li style="--i:1">Warming the milk… slowly.</li>
+				<li style="--i:2">Churros are in the fryer.</li>
+				<li style="--i:3">Almost there. One moment.</li>
+			</ul>
+			<span class="intro__bar"><i data-intro-bar></i></span>
+		</div>
+		<div class="intro__logo"><Wordmark cls="intro__wm" /></div>
+		<p class="intro__done">Ready! Let's go!</p>
+		<p class="intro__word">Let's gooo!</p>
+	</div>
+
+	<div class="cursor" data-cursor aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__label" data-cursor-label></span></div>
+
+	<!-- ============ TOPBAR ============ -->
+	<header class="topbar">
+		<a href="#top" class="topbar__logo" aria-label="Ascelcafe — back to top" data-cursor-text="Top!">
+			<small>café &amp; sweets</small><b>ASCEL<br />CAFE</b><small>since today</small>
+		</a>
+		<a href="#horarios" class="topbar__status" data-status-pill><i class="dot" data-status-dot></i><span data-status-short>Open today from 07:30</span></a>
+		<a href="https://ascelstack.com" target="_blank" rel="noopener" class="topbar__cta btn btn--small" data-magnetic data-cursor-text="AscelStack"><span class="hide-sm">Built by&nbsp;</span>AscelStack <span aria-hidden="true">↗</span></a>
+	</header>
+
+	<main id="contenu">
+		<!-- ============ 01 HERO ============ -->
+		<section class="s-hero" id="top">
+			<div class="s-hero__motif" aria-hidden="true">
+				<span>coffee</span><span>sweet</span><span>churros</span><span>coffee</span>
+			</div>
+			<div class="s-hero__kicker">
+				<span>Café &amp; Sweets</span><a class="hl" href="https://ascelstack.com" target="_blank" rel="noopener">A demo by AscelStack</a><span>Demo City</span>
+			</div>
+			<h1 class="s-hero__title">
+				<Wordmark cls="hero__wm" />
+				<span class="sr-only">Ascelcafe — coffee, churros &amp; toast. A demo website by AscelStack</span>
+			</h1>
+			<div class="gl-view" data-view="hero">
+				<img class="gl-fallback" src="/img/g1.jpg" alt="" />
+			</div>
+			<a href="#tostada" class="s-hero__stamp" aria-label="See how our toast is built" data-cursor-text="Look!">
+				<svg viewBox="0 0 200 200" class="stamp-ring"><defs><path id="ring" d="M100 100m-78 0a78 78 0 1 1 156 0a78 78 0 1 1-156 0" /></defs><text><textPath href="#ring">CAFÉ &amp; SWEETS · LET'S GO! · CAFÉ &amp; SWEETS · LET'S GO! ·</textPath></text></svg>
+				<span class="stamp-icon" set:html={cup} />
+			</a>
+			<div class="s-hero__foot">
+				<p class="s-hero__lead">Discover our new Latin-style brunch kitchen.</p>
+				<div class="s-hero__when">
+					<p>Mon — Fri from 07:30 · Sat &amp; Sun from 09:00</p>
+					<p class="today"><b>TODAY</b> <span data-status-long>Open today from 07:30</span></p>
+				</div>
+			</div>
+			<div class="s-hero__scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+		</section>
+
+		<!-- ============ 02 MARQUEE ============ -->
+		<section class="s-marquee" aria-label="Coffee, churros, toast">
+			<div class="marquee marquee--a" data-marquee="1">
+				<div class="marquee__track">
+					{[0, 1].map(() => (
+						<div class="marquee__group">
+							{marqueeA.map((w, i) => (
+								<>
+									<span class={`marquee__word ${i % 2 ? 'marquee__word--alt' : ''}`}>{w}</span>
+									<span class="marquee__icon" set:html={i % 2 ? churro : cup} />
+								</>
+							))}
+						</div>
+					))}
+				</div>
+			</div>
+			<div class="marquee marquee--b" data-marquee="-1">
+				<div class="marquee__track">
+					{[0, 1].map(() => (
+						<div class="marquee__group">
+							{marqueeB.map((w) => (
+								<>
+									<span class="marquee__word">{w}</span>
+									<span class="marquee__star">✱</span>
+								</>
+							))}
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ 03 DEFINITION ============ -->
+		<section class="s-def" id="definition">
+			<img class="s-def__peek s-def__peek--a" src="/img/g3.jpg" alt="" data-parallax="18" />
+			<img class="s-def__peek s-def__peek--b" src="/img/g4.jpg" alt="" data-parallax="-14" />
+			<div class="stamp-card" data-stamp>
+				<div class="stamp-card__in">
+					<h2 class="s-def__word">ASCELCAFE</h2>
+					<p class="s-def__phon">[a-sel-ka-fay] noun · <em>almost a habit</em></p>
+					<p class="s-def__text" data-words>
+						A small place where you come in for “just a quick coffee”, then order a churro, then a second one, then a toast to share, and finally stay far longer than planned. Known for causing sudden cravings, “okay, one more cortado” and mornings that rarely end at the announced time.
+					</p>
+					<p class="s-def__syn"><b>Synonyms:</b> <mark>sweet trap</mark>, gang of friends, second breakfast</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ 04 BUILD ============ -->
+		<section class="s-build edge-wave" id="tostada">
+			<div class="s-build__pin" data-build-pin>
+				<div class="s-build__intro">
+					<p class="eyebrow">Toast · Churros</p>
+					<h2 class="h-xl" data-split-chars data-jelly>A toast,<br />simple as that.</h2>
+				</div>
+				<div class="gl-view" data-view="build">
+					<img class="gl-fallback" src="/img/g1.jpg" alt="" />
+				</div>
+				<ol class="s-build__steps">
+					{steps.map(([t, d], i) => (
+						<li class="s-build__step">
+							<span class="n">0{i + 1}</span>
+							<span class="t">{t}</span>
+							<span class="d">{d}</span>
+						</li>
+					))}
+				</ol>
+				<div class="s-build__result" data-build-result>
+					<p class="big">THE CLASSIC</p>
+					<p>Bread, tomato, avocado, egg.<br />Eat it in four bites. Or two.</p>
+				</div>
+				<div class="s-build__result s-build__result--twist" data-build-twist>
+					<p class="big">OR CHURROS?</p>
+					<p>Sweet tooth? Dunk them in thick<br />hot chocolate. No judging.</p>
+				</div>
+				<span class="s-build__bar"><i data-build-bar></i></span>
+			</div>
+		</section>
+
+		<!-- ============ 05 GALLERY ============ -->
+		<section class="s-gallery" id="photos">
+			<div class="s-gallery__pin" data-gallery-pin>
+				<div class="s-gallery__head">
+					<p class="eyebrow">The brunch kitchen of Ascelcafe</p>
+					<h2 class="h-xl" data-split-chars data-jelly>So much<br />flavor.</h2>
+				</div>
+				<p class="s-gallery__giant" data-gallery-giant aria-hidden="true">SO MUCH FLAVOR · SO MUCH FLAVOR</p>
+				<div class="s-gallery__track" data-gallery-track>
+					{cards.map(([src, title], i) => (
+						<figure class="card" data-card style={`--r:${i % 2 ? 3 : -3}deg; --dy:${[0, 60, -30, 40, -10, 70, -40, 20][i]}px`}>
+							<span class="card__num">0{i + 1}</span>
+							<div class="card__media"><img data-card-img src={`/img/${src}`} alt={title} loading="eager" /></div>
+							<figcaption class="card__title">{title}</figcaption>
+						</figure>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ 06 NAMES ============ -->
+		<section class="s-names">
+			<div class="s-names__intro">
+				<p class="eyebrow eyebrow--y">No menu here.</p>
+				<h2 class="h-xl" data-split-chars data-jelly>Sixteen names,<br />one advice:</h2>
+			</div>
+			<div class="names-row" data-names-row="1">
+				<div class="names-row__track">
+					{[0, 1].map(() => namesA.map((n, i) => <span class={`name ${i % 2 ? 'name--pink' : ''}`} style={`--rot:${(i % 3) - 1}deg`}>{n}</span>))}
+				</div>
+			</div>
+			<div class="names-row" data-names-row="-1">
+				<div class="names-row__track">
+					{[0, 1].map(() => namesB.map((n, i) => <span class={`name ${i % 2 ? '' : 'name--pink'}`} style={`--rot:${1 - (i % 3)}deg`}>{n}</span>))}
+				</div>
+			</div>
+			<div class="s-names__cta">
+				<a href="#visit" class="vamos" data-magnetic data-cursor-text="Come!">COME TASTE IT!</a>
+				<p>The menu? It's waiting at the counter.</p>
+			</div>
+		</section>
+
+		<!-- ============ 07 AMIGOS ============ -->
+		<section class="s-amigos edge-wave" id="amigos">
+			<p class="eyebrow eyebrow--c">Synonym: gang of friends</p>
+			<p class="sign" data-sign>a little coffee,<br />a lot of chatter</p>
+			<div class="duo" data-duo>
+				<div class="duo__frame">
+					<img class="duo__photo" src="/img/amigos.jpg" alt="Friends toasting with coffee cups at Ascelcafe" />
+					<div class="duo__illu" data-duo-illu>
+						<div class="duo__illu-in" data-duo-in>
+							<img src="/img/amigos.jpg" alt="" class="ink" />
+						</div>
+					</div>
+					<span class="duo__line" data-duo-line></span>
+				</div>
+				<div class="duo__caps"><span>Drawn by hand</span><span>Lived at Ascelcafe</span></div>
+			</div>
+			<div class="s-amigos__row">
+				<figure class="polaroid" data-parallax="-12">
+					<img src="/img/polaroid.jpg" alt="Inside the café" />
+					<figcaption>Cheers!</figcaption>
+				</figure>
+				<div class="s-amigos__mini" data-parallax="10"><img src="/img/polaroid2.jpg" alt="" class="ink" /></div>
+			</div>
+			<p class="s-amigos__how">
+				<span><b>1</b> You pick your cravings</span>
+				<span><b>2</b> You get a buzzer</span>
+				<span><b>3</b> You share <em>(or not)</em></span>
+			</p>
+		</section>
+
+		<!-- ============ 08 HOURS ============ -->
+		<section class="s-hours edge-wave" id="horarios">
+			<div class="s-hours__in">
+				<div class="s-hours__txt">
+					<span class="s-hours__ico" set:html={cup} />
+					<p class="eyebrow">The kitchen is open</p>
+					<h2 class="h-xl" data-split-chars data-jelly>Hours</h2>
+					<ul class="hours">
+						{hours.map((h) => (
+							<li class="hours__row" data-hours-row data-days={h.d}>
+								<span class="hours__days">{h.days}</span>
+								<span class="hours__time">{h.from} <i>→</i> {h.to}</span>
+								<span class="hours__today">TODAY</span>
+							</li>
+						))}
+					</ul>
+					<p class="sign sign--hours" data-sign>a taste for sweet things</p>
+				</div>
+				<div class="s-hours__art" aria-hidden="true">
+					<div class="s-hours__disc"></div>
+					<svg class="drinks" viewBox="0 0 600 600" data-drinks>
+						<g class="drink drink--l" data-drink-l>
+							<path d="M120 240h170l-18 210a30 30 0 0 1-30 27H168a30 30 0 0 1-30-27z" fill="#F1EDE2" stroke="#7A1C24" stroke-width="8" stroke-linejoin="round" />
+							<path d="M290 280h22a38 38 0 0 1 0 76h-30" fill="none" stroke="#7A1C24" stroke-width="12" stroke-linecap="round" />
+							<ellipse cx="205" cy="242" rx="85" ry="16" fill="#6B3418" />
+							<path d="M150 236c20-24 40 10 60-12s40 8 60-6" fill="none" stroke="#F1EDE2" stroke-width="10" stroke-linecap="round" />
+							<path d="M180 190c-14-20 14-30 0-52M220 196c-14-20 14-30 0-52" fill="none" stroke="#F1EDE2" stroke-width="8" stroke-linecap="round" opacity=".8" />
+							<rect x="145" y="320" width="120" height="44" rx="10" fill="#B4173A" />
+							<text x="205" y="350" text-anchor="middle" fill="#F1EDE2" font-family="Archivo" font-weight="900" font-size="22">ASCEL</text>
+						</g>
+						<g class="drink drink--r" data-drink-r>
+							<path d="M340 170h140l-22 300a26 26 0 0 1-26 24h-44a26 26 0 0 1-26-24z" fill="rgba(241,237,226,.55)" stroke="#7A1C24" stroke-width="8" stroke-linejoin="round" />
+							<path d="M352 300h116l-12 166a20 20 0 0 1-20 18h-52a20 20 0 0 1-20-18z" fill="#C9864D" />
+							<path d="M348 250h124l-4 50H352z" fill="#F7F1E4" />
+							<circle cx="390" cy="380" r="7" fill="#F7F1E4" opacity=".5" /><circle cx="430" cy="420" r="5" fill="#F7F1E4" opacity=".5" />
+							<path d="M450 150 470 60" stroke="#EF3B16" stroke-width="12" stroke-linecap="round" />
+						</g>
+						<g class="splash" data-splash>
+							<circle cx="305" cy="170" r="10" fill="#FFBB1C" /><circle cx="270" cy="140" r="7" fill="#F1EDE2" /><circle cx="335" cy="130" r="8" fill="#F1EDE2" /><circle cx="300" cy="110" r="5" fill="#FFBB1C" />
+						</g>
+					</svg>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ 09 VISIT ============ -->
+		<section class="s-visit edge-wave" id="visit">
+			<div class="s-visit__marquee" aria-hidden="true">
+				<div class="s-visit__marquee-track" data-visit-marquee>DEMO CITY · <em>HERE!</em> · DEMO CITY · <em>HERE!</em> · DEMO CITY · <em>HERE!</em> ·</div>
+			</div>
+			<div class="s-visit__grid">
+				<div class="s-visit__info">
+					<p class="eyebrow eyebrow--y">Ascelcafe is at</p>
+					<h2 class="h-xl" data-split-chars data-jelly>Find<br />us</h2>
+					<address class="s-visit__addr"><span class="pin-ico">⌖</span>12 Moonlight Street<br />1000 Demo City</address>
+					<div class="s-visit__status">
+						<p>Mon — Fri from 07:30 · Sat &amp; Sun from 09:00</p>
+						<p class="today"><b>TODAY</b> <span data-status-long>Open today from 07:30</span></p>
+					</div>
+					<div class="s-visit__actions">
+						<a class="btn" href="#visit" data-magnetic data-cursor-text="Let's go!">⌖ Directions</a>
+						<a class="btn btn--line" href="#visit" data-magnetic>000 123 45 67</a>
+						<a class="btn btn--line" href="#visit" data-magnetic>@ascelcafe</a>
+						<a class="btn btn--line" href="https://ascelstack.com" target="_blank" rel="noopener" data-magnetic>ascelstack.com</a>
+					</div>
+					<ul class="s-visit__pictos">
+						<li><span>☀</span>Terrace</li>
+						<li><span>☕</span>Coffee &amp; wine</li>
+						<li><span>✿</span>A little sweet</li>
+						<li><span>▭</span>Card &amp; cash</li>
+					</ul>
+				</div>
+				<div class="s-visit__mapwrap">
+					<MapSvg />
+					<p class="s-visit__credit">Illustrative map · fictional town</p>
+					<div class="s-visit__illu" aria-hidden="true">
+						<svg viewBox="0 0 200 200"><defs><path id="ring2" d="M100 100m-80 0a80 80 0 1 1 160 0a80 80 0 1 1-160 0" /></defs><circle cx="100" cy="100" r="62" fill="#F1EDE2" /><text><textPath href="#ring2">SEE YOU SOON! · SEE YOU SOON! · SEE YOU SOON! ·</textPath></text></svg>
+						<span set:html={churro} />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ 10 END ============ -->
+		<footer class="s-end edge-wave" id="bakery">
+			<canvas class="s-end__rain" data-rain></canvas>
+			<a class="s-end__card" href="https://ascelstack.com" target="_blank" rel="noopener" data-magnetic data-cursor-text="AscelStack">
+				<span>This is a demo website crafted by AscelStack. Want one like it for your café?</span>
+				<b>ASCELSTACK.COM <i>↗</i></b>
+			</a>
+			<div class="s-end__big" data-end-big>
+				<p class="s-end__trad">Say it with us:</p>
+				<span>LET'S GOOO!</span>
+			</div>
+			<div class="s-end__meta">
+				<div class="s-end__brand"><small>Café &amp; Sweets · Demo</small><Wordmark cls="end__wm" /></div>
+				<nav class="s-end__links" aria-label="Footer">
+					<a href="#top">@ascelcafe</a>
+					<a href="https://ascelstack.com" target="_blank" rel="noopener">AscelStack</a>
+					<a href="https://ascelstack.com" target="_blank" rel="noopener">Get your website</a>
+				</nav>
+				<a class="s-end__credit" href="https://ascelstack.com" target="_blank" rel="noopener" title="AscelStack — web design &amp; development">
+					<img src="/brand/ascelstack-logo.svg" alt="AscelStack logo" width="132" height="32" />
+					<span>Designed &amp; developed by AscelStack</span>
+				</a>
+				<p class="s-end__copy">© 2026 <a href="https://ascelstack.com" target="_blank" rel="noopener">AscelStack</a>. All rights reserved. Ascelcafe is a fictional café created by AscelStack as a demo.</p>
+				<p class="s-end__psst">Psst… touch the toasts.</p>
+			</div>
+		</footer>
+	</main>
+
+	<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+		<filter id="ink" color-interpolation-filters="sRGB">
+			<feColorMatrix type="saturate" values="0" result="g" />
+			<feGaussianBlur in="g" stdDeviation="0.7" result="b" />
+			<feConvolveMatrix in="b" order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" preserveAlpha="true" result="e" />
+			<feColorMatrix in="e" type="matrix" values="-10 0 0 0 1.15  -10 0 0 0 1.15  -10 0 0 0 1.15  0 0 0 1 0" result="ei" />
+			<feComponentTransfer in="b" result="sh">
+				<feFuncR type="discrete" tableValues="0 1 1 1 1" />
+				<feFuncG type="discrete" tableValues="0 1 1 1 1" />
+				<feFuncB type="discrete" tableValues="0 1 1 1 1" />
+			</feComponentTransfer>
+			<feComposite in="ei" in2="sh" operator="arithmetic" k1="1" k2="0" k3="0" k4="0" />
+			<feComponentTransfer>
+				<feFuncR type="discrete" tableValues="0.478 0.945" />
+				<feFuncG type="discrete" tableValues="0.11 0.929" />
+				<feFuncB type="discrete" tableValues="0.141 0.886" />
+			</feComponentTransfer>
+		</filter>
+	</svg>
+
+	<script>
+		import '../scripts/app.js';
+	</script>
+</Base>
