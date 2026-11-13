@@ -1,7 +1,12 @@
 {
 	"$schema": "./node_modules/wrangler/config-schema.json",
-	// Cloudflare Pages project for the Ascelcafe demo (by AscelStack — https://ascelstack.com)
+	// Ascelcafe demo by AscelStack (https://ascelstack.com), deployed as a Cloudflare Worker serving static assets.
 	"name": "ascelcafe",
-	"pages_build_output_dir": "./dist",
-	"compatibility_date": "2026-11-01"
+	"compatibility_date": "2026-11-01",
+	"assets": {
+		"directory": "./dist",
+		"not_found_handling": "404-page",
+		"html_handling": "auto-trailing-slash"
+	},
+	"observability": { "enabled": true }
 }

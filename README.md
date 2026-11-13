@@ -70,7 +70,7 @@ Every section is tuned for phones, tablets and desktops, with touch and gyro sup
 | **Smooth scroll** | Lenis |
 | **3D** | Three.js, every food model built procedurally in code (no downloaded assets) |
 | **Effects** | SVG ink filters, CSS masks for wavy edges and stamp perforations, canvas physics |
-| **Hosting** | Cloudflare Pages: global CDN, security & cache headers |
+| **Hosting** | Cloudflare Workers (static assets): global CDN, security & cache headers, auto-deploy on every push |
 | **Extras** | Custom cursor with labels, magnetic buttons, live open/closed status, 404 page, SEO meta & JSON-LD |
 
 **Performance:** 3D scenes render only while visible, images are preloaded behind the intro, and the site runs at 60 fps on modern devices.

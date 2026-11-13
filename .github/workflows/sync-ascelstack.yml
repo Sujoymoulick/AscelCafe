@@ -1,0 +1,38 @@
+# Mirrors every push on main to the AscelStack repo (ASCEL6251/ascelcafe).
+# Cloudflare Workers Builds is connected to that repo, so each sync triggers a deploy.
+#
+# Setup (once): in this repo, Settings → Secrets and variables → Actions → New repository secret
+#   Name:  ASCELSTACK_SYNC_TOKEN
+#   Value: a fine-grained personal access token created on the ASCEL6251 account,
+#          with access to the "ascelcafe" repository and "Contents: Read and write" permission.
+name: Sync to AscelStack
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: sync-ascelstack
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'Sujoymoulick/AscelCafe'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Push main to ASCEL6251/ascelcafe
+        env:
+          TOKEN: ${{ secrets.ASCELSTACK_SYNC_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::Secret ASCELSTACK_SYNC_TOKEN is not set."
+            exit 1
+          fi
+          git push --force "https://x-access-token:${TOKEN}@github.com/ASCEL6251/ascelcafe.git" HEAD:refs/heads/main

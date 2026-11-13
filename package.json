@@ -13,8 +13,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && wrangler pages deploy",
-    "preview:cf": "astro build && wrangler pages dev"
+    "deploy": "astro build && wrangler deploy",
+    "preview:cf": "astro build && wrangler dev"
   },
   "dependencies": {
     "astro": "^7.4.11",
