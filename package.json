@@ -1,5 +1,8 @@
 {
   "name": "ascelcafe",
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "AscelStack (https://ascelstack.com)",
   "type": "module",
   "version": "0.0.1",
   "engines": {
